@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Task21 {
     public static void main(String[] args) {
         ListNode head1 = new ListNode(4);
@@ -17,6 +14,7 @@ public class Task21 {
 
 
     public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        // если один лист пустой - возвращаем другой, если оба - null
         if (list1 == null || list2 == null) {
             if (list1 != null) {
                 return list1;
@@ -27,14 +25,20 @@ public class Task21 {
             return null;
         }
 
+        // создаём новый список, первый элемент которого - наименьший из всех
         ListNode list = new ListNode(list1.val <= list2.val ? list1.val : list2.val);
+        // пропускаем первый узел в списке, из которого взяли стартовое значение для нового списка
         if (list1.val <= list2.val) {
             list1 = list1.next;
         } else {
             list2 = list2.next;
         }
+
+        // фиксируем голову, её нужно будет вернуть
         ListNode head = list;
+
         while (list1 != null || list2 != null) {
+            // если один из списков закончился, добавляем его полностью в конец нового списка
             if (list1 != null && list2 == null) {
                 list.next = list1;
                 break;
@@ -43,6 +47,7 @@ public class Task21 {
                 break;
             }
 
+            // добавляем наименьшее значение
             if (list1.val <= list2.val) {
                 list.next = new ListNode(list1.val);
                 list = list.next;
@@ -55,7 +60,6 @@ public class Task21 {
         }
         return head;
     }
-
 }
 
 
